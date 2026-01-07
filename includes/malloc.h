@@ -1,52 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/01/07 21:01:27 by rgatnaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MALLOC_H
 # define MALLOC_H
 
 # include <unistd.h>
-# include <sys/mman.h>
 # include <pthread.h>
+# include <sys/mman.h>
+# include <sys/resource.h>
+
+// This is how we'll ask the OS for memory. sys/mman.h provides these.
+// void	*mmap(void *addr, size_t len, int prot,int flags, int fd, off_t offset);
+// int	munmap(void *addr, size_t len);
+
+// And these help us set some ground rules. sys/resource.h provides these.
+// int	getrlimit(int resource, struct rlimit* rlp);
+// int	setrlimit(int resource, const struct rlimit* rlp);
+
+// Data structures and constants for our malloc implementation.
 
 // ========================
-//       CONSTANTS
+//        ENUMERATIONS
 // ========================
-# define TINY_MAX   128     // n: maximum size for tiny allocations
-# define SMALL_MAX  1024    // m: maximum size for small allocations
+typedef enum e_heap_group
+{
+	TINY,
+	SMALL,
+	LARGE
+}	t_heap_group;
 
-// Zone sizes (must be multiple of page size)
-# define TINY_ZONE_SIZE   (4 * getpagesize())   // N
-# define SMALL_ZONE_SIZE  (16 * getpagesize())  // M
-
-// Memory alignment (usually 16 bytes for x86_64)
-# define ALIGNMENT 16
-# define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
 
 // ========================
 //       DATA STRUCTURES
 // ========================
 
-// Metadata for each memory block
-typedef struct s_block {
-    size_t          size;      // Size of the user data
-    int             free;      // 1 if free, 0 if allocated
-    struct s_block *next;      // Next block in the same zone
-    struct s_block *prev;      // Previous block
-    void           *data;      // Pointer to user data (after metadata)
-} t_block;
+typedef struct s_heap
+{
+	struct s_heap	*prev;
+	struct s_heap	*next;
+	t_heap_group	type;
+	size_t			total_size;
+	size_t			free_size;
+	size_t			block_count;
+}	t_heap;
 
-// Memory zone (contains multiple blocks)
-typedef struct s_zone {
-    size_t          total_size;    // Total size of the zone
-    t_block        *first_block;   // First block in this zone
-    struct s_zone  *next;          // Next zone of same type
-    struct s_zone  *prev;          // Previous zone
-} t_zone;
+typedef struct s_block
+{
+	struct s_block	*prev;
+	struct s_block	*next;
+	size_t			data_size;
+	int				is_free;
+}	t_block;
+
+// ========================
+//       CONSTANTS
+// ========================
+
+// Zone sizes (must be multiple of page size)
+# define TINY_HEAP_SIZE (4 * getpagesize())   // N
+# define SMALL_HEAP_SIZE (16 * getpagesize())  // M
+// n: maximum size for tiny allocations
+# define TINY_BLOCK_MAX (TINY_HEAP_SIZE / 128)
+// m: maximum size for small allocations
+# define SMALL_BLOCK_MAX (SMALL_HEAP_SIZE / 128)
+
+// Memory alignment (usually 16 bytes for x86_64)
+# define ALIGNMENT 16
+# define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
+
+// Shift to get user data from heap metadata
+# define HEAP_SHIFT(heap) ((void *)((char *)(heap) + sizeof(t_heap)))
+// Shift to get user data from block metadata
+# define BLOCK_SHIFT(block) ((void *)((char *)(block) + sizeof(t_block)))
+
+
 
 // ========================
 //       GLOBAL VARIABLES
 // ========================
-extern t_zone *g_tiny_zones;
-extern t_zone *g_small_zones;
-extern t_zone *g_large_zones;
-extern pthread_mutex_t g_malloc_mutex;
+extern pthread_mutex_t		g_mutex;
+extern t_heap				*g_heap;
 
 // ========================
 //       MAIN FUNCTIONS
@@ -54,17 +96,16 @@ extern pthread_mutex_t g_malloc_mutex;
 void    *malloc(size_t size);
 void    free(void *ptr);
 void    *realloc(void *ptr, size_t size);
-void    show_alloc_mem(void);
 
 // ========================
 //      HELPER FUNCTIONS
 // ========================
-size_t  get_page_size(void);
-void    *allocate_memory(size_t size);
-t_zone  *create_zone(size_t zone_size, size_t block_size);
-t_block *find_free_block(t_zone *zone, size_t size);
-t_block *create_block(void *memory, size_t size);
-void    split_block(t_block *block, size_t size);
-void    merge_free_blocks(t_zone *zone);
+int				get_heap_size(size_t size);
+t_heap_group	get_heap_group(size_t size);
+void			find_available_block(size_t size, t_heap **res_heap, t_block **res_block);
+
+
+
+
 
 #endif

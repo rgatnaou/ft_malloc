@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   global_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 14:47:44 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/07 15:01:12 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/01/07 18:46:21 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/01/07 20:01:47 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "malloc.h"
 
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
+pthread_mutex_t		g_mutex = PTHREAD_MUTEX_INITIALIZER;
+t_heap				*g_heap = NULL;

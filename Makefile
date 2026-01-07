@@ -4,7 +4,7 @@
 NAME = libft_malloc
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fPIC
-INCLUDES = -Iincludes -Ilibft/includes
+INCLUDES = -I includes -I libft/includes
 
 # ========================
 #       HOSTTYPE CHECK

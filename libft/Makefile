@@ -1,4 +1,4 @@
-SRCS = srcs/ft_strlen.c
+SRCS = srcs/ft_strlen.c srcs/ft_memset.c
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -21,3 +21,5 @@ clean:
 
 fclean: clean
 	rm -f libft.a
+
+re: fclean all

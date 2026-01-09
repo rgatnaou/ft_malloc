@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   block_find.c                                       :+:      :+:    :+:   */
+/*   size.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 20:22:09 by rgatnaou          #+#    #+#             */
+/*   Created: 2026/01/07 20:18:17 by rgatnaou          #+#    #+#             */
 /*   Updated: 2026/01/09 17:23:38 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "malloc.h"
 
-void	find_block(size_t s, t_heap **res_heap, t_block **res_block)
+int	get_heap_size(size_t size)
 {
-	t_heap			*heap;
-	t_block			*block;
-	t_heap_group	group;
+	if (size <= (size_t)TINY_BLOCK_MAX)
+		return (TINY_HEAP_SIZE);
+	else if (size <= (size_t)SMALL_BLOCK_MAX)
+		return (SMALL_HEAP_SIZE);
+	else
+		return (ALIGN(size + sizeof(t_heap) + sizeof(t_block)));
+}
 
-	heap = g_heap;
-	group = get_heap_type(s);
-	while (heap)
-	{
-		block = HEAP_SHIFT(heap);
-		while (block)
-		{
-			if (heap->type == group && block->is_free
-				&& (block->data_size >= s + sizeof(t_block)))
-			{
-				*res_heap = heap;
-				*res_block = block;
-				return ;
-			}
-			block = block->next;
-		}
-		heap = heap->next;
-	}
-	res_block = NULL;
-	res_heap = NULL;
+t_heap_group	get_heap_type(size_t size)
+{
+	if (size <= (size_t)TINY_BLOCK_MAX)
+		return (TINY);
+	else if (size <= (size_t)SMALL_BLOCK_MAX)
+		return (SMALL);
+	else
+		return (LARGE);
 }

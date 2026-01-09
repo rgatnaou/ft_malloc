@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   heap_find.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 16:36:14 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 16:43:29 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/01/09 15:24:44 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/01/09 17:25:51 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "malloc.h"
 
-#include <stddef.h>
+t_heap	*find_heap(size_t size)
+{
+	t_heap				*heap;
+	enum e_heap_type	type;
 
-int		ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
-
-
-#endif
+	type = get_heap_type(size);
+	heap = g_heap;
+	while (heap)
+	{
+		if (heap->type == type && heap->free_size >= size + sizeof(t_block))
+			return (heap);
+		heap = heap->next;
+	}
+	heap = create_heap(size);
+	return (heap);
+}

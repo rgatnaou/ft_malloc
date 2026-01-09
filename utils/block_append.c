@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   block_size.c                                       :+:      :+:    :+:   */
+/*   block_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 20:18:17 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/07 20:22:17 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/01/09 16:21:08 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/01/09 16:28:35 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int	get_heap_size(size_t size)
+void	append_block(t_heap *heap, t_block *block, size_t size)
 {
-	if (size <= TINY_BLOCK_MAX)
-		return (TINY_HEAP_SIZE);
-	else if (size <= SMALL_BLOCK_MAX)
-		return (SMALL_HEAP_SIZE);
-	else
-		return (ALIGN(size + sizeof(t_heap) + sizeof(t_block)));
-}
+	t_block	*last_block;
 
-t_heap_group get_heap_group(size_t size)
-{
-	if (size <= TINY_BLOCK_MAX)
-		return (TINY);
-	else if (size <= SMALL_BLOCK_MAX)
-		return (SMALL);
-	else
-		return (LARGE);
+	last_block = (t_block *)HEAP_SHIFT(heap);
+	while (last_block->next)
+		last_block = last_block->next;
+	last_block->next = block;
+	block->prev = last_block;
+	block->next = NULL;
+	block->data_size = size;
+	block->is_free = 0;
+	heap->block_count++;
+	heap->free_size -= (size + sizeof(t_block));
 }

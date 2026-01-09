@@ -25,7 +25,7 @@ OBJ_DIR = objs
 
 SRCS =	$(SRC_MAIN)/malloc.c \
         $(SRC_UTILS)/block_append.c $(SRC_UTILS)/block_fill.c $(SRC_UTILS)/block_find.c \
-        $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c \
+        $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c \
         $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c \
         $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c 
 

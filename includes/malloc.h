@@ -6,19 +6,19 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 17:25:06 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:53:05 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
-// # include <unistd.h>
+# include <stdio.h>
 # include <pthread.h>
 #include <unistd.h>
 # include <sys/mman.h>
 // # include <sys/resource.h>
-# include "libft.h"
+# include "../libft/includes/libft.h"
 
 // This is how we'll ask the OS for memory. sys/mman.h provides these.
 // void	*mmap(void *addr, size_t len, int prot,int flags, int fd, off_t offset);
@@ -103,7 +103,7 @@ extern t_heap				*g_heap;
 // ========================
 //       MAIN FUNCTIONS
 // ========================
-void	*malloc(size_t size);
+void	*ft_malloc(size_t size);
 void	free(void *ptr);
 void	*realloc(void *ptr, size_t size);
 
@@ -116,8 +116,14 @@ void			find_block(size_t s, t_heap **res_heap,t_block **res_block);
 t_block			*try_filling_block(size_t size);
 t_heap			*create_heap(size_t size);
 t_heap			*find_heap(size_t size);
-void			append_block(t_heap *heap, t_block *block, size_t size);
+t_block			*append_block(t_heap *heap, size_t size);
 
+// ========================
+//      DEBUG FUNCTIONS
+// ========================
 
+void			show_heap(void);
+void			print_block(t_block *block);
+void			print_heap(t_heap *heap);
 
 #endif

@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../includes/malloc.h"
 
 int	main(void)
 {
 	printf("=== Testing Basic Malloc ===\n");
 
 	// Test 1: Simple allocation
-	char *str = malloc(100);
+	char *str = ft_malloc(100);
 	if (str == NULL) {
 		printf("FAIL: malloc returned NULL\n");
 		return 1;
@@ -18,7 +19,7 @@ int	main(void)
 	printf("string length: %zu\n", strlen(str));
 
 	// Test 2: Multiple allocations
-	int *numbers = malloc(10 * sizeof(int));
+	int *numbers = ft_malloc(10 * sizeof(int));
 	if (numbers == NULL) {
 		printf("FAIL: malloc for numbers returned NULL\n");
 		return (1);

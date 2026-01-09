@@ -2,5 +2,6 @@
 	"editor.insertSpaces": false,
 	"editor.comments.insertSpace": true,
 	"editor.renderWhitespace": "all",
-	"files.insertFinalNewline": true
+	"files.insertFinalNewline": true,
+	"C_Cpp.errorSquiggles": "disabled"
 }

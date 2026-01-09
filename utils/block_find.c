@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:09 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 17:23:38 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:37:11 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	find_block(size_t s, t_heap **res_heap, t_block **res_block)
 		}
 		heap = heap->next;
 	}
-	res_block = NULL;
-	res_heap = NULL;
+	*res_block = NULL;
+	*res_heap = NULL;
 }

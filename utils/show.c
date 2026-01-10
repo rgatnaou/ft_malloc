@@ -6,16 +6,16 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:11:36 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 18:38:25 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:04:15 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include "stdio.h"
 
-
-void show_heap(){
+void	show_heap(){
 	t_heap *heap = g_heap;
+	
 	printf("===== HEAP STRUCTURE =====\n");
 	while (heap)
 	{
@@ -34,13 +34,9 @@ void show_heap(){
 			block = block->next;
 		}
 		heap = heap->next;
-		
 	}
-	
 	printf("===== END OF HEAP =====\n");
 }
-
-
 
 void print_block(t_block *block)
 {
@@ -53,7 +49,6 @@ void print_block(t_block *block)
 		printf("Block is NULL..\n");
 	}
 }
-
 
 void print_heap(t_heap *heap)
 {

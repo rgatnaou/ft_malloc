@@ -6,12 +6,11 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:21 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 18:37:31 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:02:46 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
 
 void	split_block(t_heap *heap, t_block *block, size_t size)
 {
@@ -22,17 +21,13 @@ void	split_block(t_heap *heap, t_block *block, size_t size)
 	new_block->is_free = 1;
 	new_block->prev = block;
 	new_block->next = block->next;
-
 	if (block->next)
 		block->next->prev = new_block;
-
 	block->next = new_block;
 	block->data_size = size;
-
 	heap->block_count++;
 	heap->free_size -= sizeof(t_block);
 }
-
 
 t_block	*try_filling_block(size_t size)
 {

@@ -23,10 +23,11 @@ SRC_LIBFT = libft/srcs
 SRC_UTILS = utils
 OBJ_DIR = objs
 
-SRCS =	$(SRC_MAIN)/malloc.c \
+SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c \
         $(SRC_UTILS)/block_append.c $(SRC_UTILS)/block_fill.c $(SRC_UTILS)/block_find.c \
-        $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c \
-        $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c \
+		$(SRC_UTILS)/block_remove.c $(SRC_UTILS)/block_merge.c\
+        $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c $(SRC_UTILS)/ptr_search.c \
+        $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c $(SRC_UTILS)/heap_remove.c \
         $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c 
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
@@ -50,13 +51,11 @@ $(OBJ_DIR)/%.o: %.c
 # Clean object files
 clean:
 	rm -f $(OBJS)
-	@make -C libft clean
 	@echo "Object files cleaned"
 
 # Full clean
 fclean: clean
 	rm -f $(FULLNAME) $(LINKNAME)
-	@make -C libft fclean
 	@echo "Full clean done"
 
 # Rebuild

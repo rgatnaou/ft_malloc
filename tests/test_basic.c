@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "../includes/malloc.h"
 
@@ -16,7 +15,7 @@ int	main(void)
 
 	strcpy(str, "Hello, World!");
 	printf("Test 1 PASS: %s\n", str);
-	printf("string length: %zu\n", strlen(str));
+	printf("string length: %zu\n", ft_strlen(str));
 
 	// Test 2: Multiple allocations
 	int *numbers = ft_malloc(10 * sizeof(int));
@@ -30,11 +29,13 @@ int	main(void)
 	}
 	printf("Test 2 PASS: numbers[5] = %d\n", numbers[5]);
 
+	show_heap();
+	// Test 3: Free
+	free(str);
+	free(numbers);
+	printf("Test 3 PASS: Memory freed\n");
+	show_heap();
 
-	// // Test 3: Free
-	// free(str);
-	// free(numbers);
-	// printf("Test 3 PASS: Memory freed\n");
 
 	// // Test 4: realloc
 	// int *arr = malloc(5 * sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 15:21:47 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 17:25:26 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/10 18:37:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ t_heap	*create_heap(size_t size)
 	heap->prev = NULL;
 	g_heap = heap;
 	heap->block_count = 0;
-
 	return (heap);
 }

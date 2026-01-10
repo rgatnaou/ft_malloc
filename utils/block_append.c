@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 16:21:08 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 18:53:25 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:01:43 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_block	*append_block(t_heap *heap, size_t size)
 	last_block = (t_block *)HEAP_SHIFT(heap);
 	while (last_block->next)
 		last_block = last_block->next;
-	
 	new_block = (t_block *)((char *)BLOCK_SHIFT(last_block) + last_block->data_size);
 	new_block->data_size = size;
 	new_block->is_free = 0;

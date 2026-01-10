@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/09 18:53:05 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/10 18:48:15 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	*realloc(void *ptr, size_t size);
 // ========================
 //      HELPER FUNCTIONS
 // ========================
+
 int				get_heap_size(size_t size);
 t_heap_group	get_heap_type(size_t size);
 void			find_block(size_t s, t_heap **res_heap,t_block **res_block);
@@ -117,6 +118,11 @@ t_block			*try_filling_block(size_t size);
 t_heap			*create_heap(size_t size);
 t_heap			*find_heap(size_t size);
 t_block			*append_block(t_heap *heap, size_t size);
+
+void	ptr_search(void *ptr, t_heap **ptr_heap, t_block **ptr_block);
+t_block	*merge_block(t_heap *heap, t_block *block);
+void	remove_block(t_heap *heap, t_block *block);
+void	remove_heap(t_heap *heap);
 
 // ========================
 //      DEBUG FUNCTIONS

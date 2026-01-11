@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/10 18:48:15 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/11 17:03:36 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	*realloc(void *ptr, size_t size);
 //      HELPER FUNCTIONS
 // ========================
 
+void			start_free(void *ptr, t_heap *heap, t_block *block);
+void			*start_malloc(size_t size);
 int				get_heap_size(size_t size);
 t_heap_group	get_heap_type(size_t size);
 void			find_block(size_t s, t_heap **res_heap,t_block **res_block);

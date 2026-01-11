@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/09 16:36:14 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/11 17:11:12 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/01/11 17:58:32 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/01/11 18:06:32 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stddef.h>
+void	ft_putptr(void *ptr)
+{
+	size_t			address;
+	char			hex_chars[17];
+	char			hex_str[2 + sizeof(size_t) * 2 + 1];
+	size_t			i;
 
-size_t	ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-
-#endif
+	hex_chars = "0123456789abcdef";
+	address = (size_t)ptr;
+	hex_str[0] = '0';
+	hex_str[1] = 'x';
+	i = 2 + sizeof(size_t) * 2;
+	hex_str[i] = '\0';
+	while (i > 2)
+	{
+		hex_str[--i] = hex_chars[address % 16];
+		address /= 16;
+	}
+	ft_putstr(hex_str);
+}

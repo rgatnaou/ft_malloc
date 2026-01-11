@@ -23,12 +23,13 @@ SRC_LIBFT = libft/srcs
 SRC_UTILS = utils
 OBJ_DIR = objs
 
-SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c \
+SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c \
+		$(SRC_MAIN)/show_alloc_mem.c $(SRC_MAIN)/memory_zones.c\
         $(SRC_UTILS)/block_append.c $(SRC_UTILS)/block_fill.c $(SRC_UTILS)/block_find.c \
 		$(SRC_UTILS)/block_remove.c $(SRC_UTILS)/block_merge.c\
         $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c $(SRC_UTILS)/ptr_search.c \
         $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c $(SRC_UTILS)/heap_remove.c \
-        $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c 
+        $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c $(SRC_LIBFT)/ft_putchar.c $(SRC_LIBFT)/ft_putstr.c 
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:21 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/10 19:02:46 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/11 16:34:57 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,11 @@ t_block	*try_filling_block(size_t size)
 {
 	t_heap				*heap;
 	t_block				*block;
-	enum e_heap_type	type;
-	size_t				min_data;
 
 	find_block(size, &heap, &block);
 	if (!block)
 		return (NULL);
-	type = heap->type;
-	if (type != LARGE)
-	{
-		min_data = (type == TINY) ? TINY_BLOCK_MIN : SMALL_BLOCK_MIN;
-		if (block->data_size >= size + sizeof(t_block) + min_data)
-			split_block(heap, block, size);
-	}
+	split_block(heap, block, size);
 	block->is_free = 0;
 	return (block);
 }

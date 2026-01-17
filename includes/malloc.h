@@ -6,18 +6,16 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/11 17:03:36 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/12 18:01:38 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
-# include <stdio.h>
 # include <pthread.h>
-#include <unistd.h>
+# include <unistd.h>
 # include <sys/mman.h>
-// # include <sys/resource.h>
 # include "../libft/includes/libft.h"
 
 // This is how we'll ask the OS for memory. sys/mman.h provides these.
@@ -39,7 +37,6 @@ typedef enum e_heap_type
 	SMALL,
 	LARGE
 }	t_heap_group;
-
 
 // ========================
 //       DATA STRUCTURES
@@ -81,8 +78,6 @@ typedef struct s_block
 // m + 1: minimum size for large allocations
 # define SMALL_BLOCK_MIN (TINY_BLOCK_MAX + 1)
 
-
-
 // Memory alignment (usually 16 bytes for x86_64)
 # define ALIGNMENT 16
 # define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
@@ -92,18 +87,16 @@ typedef struct s_block
 // Shift to get user data from block metadata
 # define BLOCK_SHIFT(block) ((void *)((char *)(block) + sizeof(t_block)))
 
-
-
 // ========================
 //       GLOBAL VARIABLES
 // ========================
-extern pthread_mutex_t		g_mutex;
-extern t_heap				*g_heap;
+extern pthread_mutex_t	g_mutex;
+extern t_heap			*g_heap;
 
 // ========================
 //       MAIN FUNCTIONS
 // ========================
-void	*ft_malloc(size_t size);
+void	*malloc(size_t size);
 void	free(void *ptr);
 void	*realloc(void *ptr, size_t size);
 
@@ -111,15 +104,17 @@ void	*realloc(void *ptr, size_t size);
 //      HELPER FUNCTIONS
 // ========================
 
-void			start_free(void *ptr, t_heap *heap, t_block *block);
-void			*start_malloc(size_t size);
-int				get_heap_size(size_t size);
+void	start_free(t_heap *heap, t_block *block);
+void	*start_malloc(size_t size);
+
 t_heap_group	get_heap_type(size_t size);
-void			find_block(size_t s, t_heap **res_heap,t_block **res_block);
-t_block			*try_filling_block(size_t size);
-t_heap			*create_heap(size_t size);
-t_heap			*find_heap(size_t size);
-t_block			*append_block(t_heap *heap, size_t size);
+int		get_heap_size(size_t size);
+
+void	find_block(size_t s, t_heap **res_heap, t_block **res_block);
+t_block	*try_filling_block(size_t size);
+t_heap	*create_heap(size_t size);
+t_heap	*find_heap(size_t size);
+t_block	*append_block(t_heap *heap, size_t size);
 
 void	ptr_search(void *ptr, t_heap **ptr_heap, t_block **ptr_block);
 t_block	*merge_block(t_heap *heap, t_block *block);
@@ -130,8 +125,8 @@ void	remove_heap(t_heap *heap);
 //      DEBUG FUNCTIONS
 // ========================
 
-void			show_heap(void);
-void			print_block(t_block *block);
-void			print_heap(t_heap *heap);
+void	show_heap(void);
+void	print_block(t_block *block);
+void	print_heap(t_heap *heap);
 
 #endif

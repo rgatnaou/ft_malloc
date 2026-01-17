@@ -29,7 +29,8 @@ SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c \
 		$(SRC_UTILS)/block_remove.c $(SRC_UTILS)/block_merge.c\
         $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c $(SRC_UTILS)/ptr_search.c \
         $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c $(SRC_UTILS)/heap_remove.c \
-        $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c $(SRC_LIBFT)/ft_putchar.c $(SRC_LIBFT)/ft_putstr.c 
+        $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c $(SRC_LIBFT)/ft_putchar.c $(SRC_LIBFT)/ft_putstr.c \
+		$(SRC_LIBFT)/ft_putnbr.c $(SRC_LIBFT)/ft_putptr.c $(SRC_LIBFT)/ft_memcpy.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

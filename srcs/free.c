@@ -6,13 +6,13 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 17:57:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/11 17:03:03 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:12:25 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void	start_free(void *ptr, t_heap *heap, t_block *block)
+void	start_free(t_heap *heap, t_block *block)
 {
 	if (block)
 	{
@@ -33,6 +33,6 @@ void free(void *ptr)
 		return ;
 	ptr_search(ptr, &heap, &block);
 	pthread_mutex_lock(&g_mutex);
-	start_free(ptr, heap, block);
+	start_free(heap, block);
 	pthread_mutex_unlock(&g_mutex);
 }

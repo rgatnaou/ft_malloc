@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:11:36 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/10 19:04:15 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/12 19:06:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	show_heap(){
 	t_heap *heap = g_heap;
 	
-	printf("===== HEAP STRUCTURE =====\n");
+	printf("===== HEAP STRUCTURE =====***\n");
 	while (heap)
 	{
 		printf("Heap Type: %s | Total Size: %zu | Free Size: %zu | Block Count: %zu\n",
@@ -25,7 +25,7 @@ void	show_heap(){
 			heap->free_size,
 			heap->block_count);
 		t_block *block = (t_block *)HEAP_SHIFT(heap);
-		while (block)
+		while (block && heap->block_count)
 		{
 			printf("  Block Size: %zu | Is Free: %d\n",
 				block->data_size,
@@ -35,7 +35,7 @@ void	show_heap(){
 		}
 		heap = heap->next;
 	}
-	printf("===== END OF HEAP =====\n");
+	printf("===== END OF HEAP =====***\n");
 }
 
 void print_block(t_block *block)

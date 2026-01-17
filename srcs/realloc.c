@@ -6,16 +6,20 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:39:26 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/11 17:08:02 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/12 15:18:53 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void	*start_realloc(void *ptr, size_t size, t_heap **heap, t_block **block)
+void	*start_realloc(void *ptr, size_t size)
 {
+	t_block	*block;
+	t_heap	*heap;
 	void	*new_ptr;
 
+	heap = g_heap;
+	block = NULL;
 	ptr_search(ptr, &heap, &block);
 	if (!block)
 		return (NULL);
@@ -23,15 +27,13 @@ void	*start_realloc(void *ptr, size_t size, t_heap **heap, t_block **block)
 	if (new_ptr)
 	{
 		ft_memcpy(new_ptr, ptr, block->data_size);
-		start_free(ptr, heap, block);
+		start_free(heap, block);
 	}
 	return (new_ptr);
 }
 
 void	*realloc(void *ptr, size_t size)
 {
-	t_heap	*heap;
-	t_block	*block;
 	void	*new_ptr;
 
 	if (!ptr)
@@ -42,7 +44,7 @@ void	*realloc(void *ptr, size_t size)
 		return (NULL);
 	}
 	pthread_mutex_lock(&g_mutex);
-	new_ptr = start_realloc(ptr, size, &heap, &block);
+	new_ptr = start_realloc(ptr, size);
 	pthread_mutex_unlock(&g_mutex);
 	return (new_ptr);
 }

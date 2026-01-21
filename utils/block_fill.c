@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:21 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/11 16:34:57 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:14:39 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	split_block(t_heap *heap, t_block *block, size_t size)
 
 t_block	*try_filling_block(size_t size)
 {
-	t_heap				*heap;
-	t_block				*block;
+	t_heap	*heap;
+	t_block	*block;
 
 	find_block(size, &heap, &block);
 	if (!block)

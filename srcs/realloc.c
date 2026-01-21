@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:39:26 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/12 15:18:53 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:48:10 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*realloc(void *ptr, size_t size)
 	void	*new_ptr;
 
 	if (!ptr)
-		return (start_malloc(size));
+		return (malloc(size));
 	if (size == 0)
 	{
 		free(ptr);

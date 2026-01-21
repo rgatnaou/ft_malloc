@@ -18,39 +18,38 @@ int	main(void)
 	printf("string length: %zu\n", strlen(str));
 
 	// // Test 2: Multiple allocations
-	// int *numbers = malloc(10 * sizeof(int));
-	// if (numbers == NULL) {
-	// 	printf("FAIL: malloc for numbers returned NULL\n");
-	// 	return (1);
-	// }
+	int *numbers = malloc(10 * sizeof(int));
+	if (numbers == NULL) {
+		printf("FAIL: malloc for numbers returned NULL\n");
+		return (1);
+	}
 
-	// for (int i = 0; i < 10; i++) {
-	// 	numbers[i] = i * 10;
-	// }
-	// printf("Test 2 PASS: numbers[5] = %d\n", numbers[5]);
+	for (int i = 0; i < 10; i++) {
+		numbers[i] = i * 10;
+	}
+	printf("Test 2 PASS: numbers[5] = %d\n", numbers[5]);
 
-	// show_heap();
 	// Test 3: Free
 	free(str);
-	// free(numbers);
+	free(numbers);
 	printf("Test 3 PASS: Memory freed\n");
-	show_heap();
 
-	// // Test 4: realloc
-	// int *arr = malloc(5 * sizeof(int));
-	// for (int i = 0; i < 5; i++) arr[i] = i;
+	// Test 4: realloc
+	int *arr = malloc(5 * sizeof(int));
+	for (int i = 0; i < 5; i++) arr[i] = i;
 
-	// arr = realloc(arr, 10 * sizeof(int));
-	// if (arr == NULL) {
-	// 	 printf("FAIL: realloc returned NULL\n");
-	// 	 return 1;
-	// }
+	arr = realloc(arr, 10 * sizeof(int));
+	if (arr == NULL) {
+		 printf("FAIL: realloc returned NULL\n");
+		 return 1;
+	}
 
-	// printf("Test 4 PASS: realloc worked\n");
-	// for (int i = 5; i < 10; i++) arr[i] = i;
+	printf("Test 4 PASS: realloc worked\n");
+	for (int i = 5; i < 10; i++) arr[i] = i;
 		
-	// free(arr);
+	free(arr);
 
 	printf("\n=== All Basic Tests Passed ===\n");
+	show_heap();
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 15:08:34 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/21 18:16:55 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:01:26 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void	*malloc(size_t size)
 	void	*block;
 
 	pthread_mutex_lock(&g_mutex);
-	// log_detail();
 	block = start_malloc(size);
-	if (block)
-		ft_memset(block, 0, size);
 	pthread_mutex_unlock(&g_mutex);
 	return (block);
 }

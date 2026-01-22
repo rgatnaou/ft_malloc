@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/12 18:01:38 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:04:17 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ extern t_heap			*g_heap;
 void	*malloc(size_t size);
 void	free(void *ptr);
 void	*realloc(void *ptr, size_t size);
-
+void	show_alloc_mem(void);
+void	show_alloc_mem_ex(void);
 // ========================
 //      HELPER FUNCTIONS
 // ========================
@@ -107,8 +108,8 @@ void	*realloc(void *ptr, size_t size);
 void	start_free(t_heap *heap, t_block *block);
 void	*start_malloc(size_t size);
 
+int				get_heap_size(size_t size);
 t_heap_group	get_heap_type(size_t size);
-int		get_heap_size(size_t size);
 
 void	find_block(size_t s, t_heap **res_heap, t_block **res_block);
 t_block	*try_filling_block(size_t size);

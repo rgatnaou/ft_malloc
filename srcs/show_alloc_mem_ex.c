@@ -1,21 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*   show_alloc_mem_ex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 17:47:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/22 18:04:10 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:03:05 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+static void	print_hex_dump(const void *addr, size_t size)
+{
+	const unsigned char	*data;
+	size_t				i;
+	size_t				j;
+
+	data = (const unsigned char *)addr;
+	i = 0;
+	while (i < size)
+	{
+		ft_putstr("  ");
+		ft_putnbr(i);
+		ft_putstr(" : ");
+		j = 0;
+		while (j < 16)
+		{
+			if (i + j < size)
+			{
+				ft_putchar("0123456789abcdef"[data[i + j] / 16]);
+				ft_putchar("0123456789abcdef"[data[i + j] % 16]);
+			}
+			ft_putchar(' ');
+			j++;
+		}
+		ft_putstr("|\n");
+		i += 16;
+	}
+}
+
 static void	print_blocks(t_block *block, size_t *total_allocated)
 {
 	while (block)
 	{
+		if (block->is_free == 0)
+			ft_putstr(" [USED] ");
+		else
+			ft_putstr(" [FREE] ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)));
 		ft_putstr(" - ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)
@@ -23,13 +56,21 @@ static void	print_blocks(t_block *block, size_t *total_allocated)
 		ft_putstr(" : ");
 		ft_putnbr(block->data_size);
 		ft_putstr(" bytes\n");
-		*total_allocated += block->data_size;
+		ft_putstr("  Hex dump: \n");
+		if (block->is_free == 0)
+		{
+			*total_allocated += block->data_size;
+			print_hex_dump((char *)block + sizeof(t_block), block->data_size);
+			ft_putchar('\n');
+		}
+		else
+			ft_putstr("   Free block, no hex dump.\n\n");
 		block = block->next;
 	}
 	ft_putchar('\n');
 }
 
-void	show_alloc_mem(void)
+void	show_alloc_mem_ex(void)
 {
 	t_heap	*heap;
 	t_block	*block;

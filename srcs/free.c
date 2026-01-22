@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 17:57:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/12 15:12:25 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:01:15 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	start_free(t_heap *heap, t_block *block)
 	}
 }
 
-void free(void *ptr)
+void	free(void *ptr)
 {
 	t_block	*block;
 	t_heap	*heap;

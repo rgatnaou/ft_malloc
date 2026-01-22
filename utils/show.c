@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:11:36 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/21 18:11:20 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:05:09 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	show_heap(){
 	t_heap *heap = g_heap;
-	
+
 	printf("===== HEAP STRUCTURE =====***\n");
 	while (heap)
 	{

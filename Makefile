@@ -24,7 +24,7 @@ SRC_UTILS = utils
 OBJ_DIR = objs
 
 SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c \
-		$(SRC_MAIN)/show_alloc_mem.c $(SRC_MAIN)/memory_zones.c\
+		$(SRC_MAIN)/show_alloc_mem.c $(SRC_MAIN)/show_alloc_mem_ex.c\
         $(SRC_UTILS)/block_append.c $(SRC_UTILS)/block_fill.c $(SRC_UTILS)/block_find.c \
 		$(SRC_UTILS)/block_remove.c $(SRC_UTILS)/block_merge.c\
         $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/show.c $(SRC_UTILS)/ptr_search.c \

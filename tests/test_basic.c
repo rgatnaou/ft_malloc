@@ -31,6 +31,7 @@ int	main(void)
 
 	// Test 3: Free
 	free(str);
+	show_alloc_mem_ex();
 	free(numbers);
 	printf("Test 3 PASS: Memory freed\n");
 

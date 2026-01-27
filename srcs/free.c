@@ -29,10 +29,10 @@ void	free(void *ptr)
 	t_heap	*heap;
 
 	heap = g_heap;
+	pthread_mutex_lock(&g_mutex);
 	if (!ptr || !heap)
 		return ;
 	ptr_search(ptr, &heap, &block);
-	pthread_mutex_lock(&g_mutex);
 	start_free(heap, block);
 	pthread_mutex_unlock(&g_mutex);
 }

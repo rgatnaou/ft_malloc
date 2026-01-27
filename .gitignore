@@ -1,4 +1,8 @@
 *.aout
 *.so
 *o
-
+.vscode
+malloc-42
+libft*.so
+tests/test_basic
+test/test

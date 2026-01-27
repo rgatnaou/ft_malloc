@@ -21,6 +21,11 @@ void	*start_realloc(void *ptr, size_t size)
 	heap = g_heap;
 	block = NULL;
 	ptr_search(ptr, &heap, &block);
+	if (size == 0)
+	{
+		start_free(heap, block);
+		return (NULL);
+	}
 	if (!block)
 		return (NULL);
 	new_ptr = start_malloc(size);
@@ -38,11 +43,6 @@ void	*realloc(void *ptr, size_t size)
 
 	if (!ptr)
 		return (malloc(size));
-	if (size == 0)
-	{
-		free(ptr);
-		return (NULL);
-	}
 	pthread_mutex_lock(&g_mutex);
 	new_ptr = start_realloc(ptr, size);
 	pthread_mutex_unlock(&g_mutex);

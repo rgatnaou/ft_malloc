@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <stdlib.h>
 
 void	*start_malloc(size_t size)
 {

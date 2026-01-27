@@ -36,7 +36,17 @@ static void	print_hex_dump(const void *addr, size_t size)
 			ft_putchar(' ');
 			j++;
 		}
-		ft_putstr("|\n");
+		ft_putstr("| ");
+		j = 0;
+		while (j < 16 && i + j < size)
+		{
+			if (data[i + j] >= 32 && data[i + j] <= 126)
+				ft_putchar(data[i + j]);
+			else
+				ft_putchar('.');
+			j++;
+		}
+		ft_putstr(" |\n");
 		i += 16;
 	}
 }
@@ -91,10 +101,15 @@ void	show_alloc_mem_ex(void)
 		ft_putchar('\n');
 		block = (t_block *)HEAP_SHIFT(heap);
 		print_blocks(block, &total_allocated);
+		ft_putstr("total blocks : ");
+		ft_putnbr(heap->block_count);
+		ft_putchar('\n');
 		heap = heap->next;
 	}
 	ft_putstr("Total : ");
 	ft_putnbr(total_allocated);
 	ft_putstr(" bytes\n");
+
+	ft_putstr("----- End of detailed memory allocation -----\n");
 	pthread_mutex_unlock(&g_mutex);
 }

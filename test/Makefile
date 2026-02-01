@@ -32,7 +32,7 @@ NAME = test
 
 CC = gcc
 
-FLAGS_CC = # -Wall -Wextra -Werror
+FLAGS_CC = # -Wall -Wextra -Werror  -fsanitize=address 
 
 # **************************************************************************** #
 # COMMANDS  		    													   #

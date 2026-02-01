@@ -26,7 +26,7 @@ void	find_block(size_t s, t_heap **res_heap, t_block **res_block)
 		while (block)
 		{
 			if (heap->type == group && block->is_free
-				&& (block->data_size >= s + sizeof(t_block)))
+				&& (block->data_size >= s))
 			{
 				*res_heap = heap;
 				*res_block = block;

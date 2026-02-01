@@ -59,6 +59,8 @@ static void	print_blocks(t_block *block, size_t *total_allocated)
 			ft_putstr(" [USED] ");
 		else
 			ft_putstr(" [FREE] ");
+		ft_putptr((void *)block);
+		ft_putstr(" : ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)));
 		ft_putstr(" - ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)
@@ -77,7 +79,6 @@ static void	print_blocks(t_block *block, size_t *total_allocated)
 			ft_putstr("   Free block, no hex dump.\n\n");
 		block = block->next;
 	}
-	ft_putchar('\n');
 }
 
 void	show_alloc_mem_ex(void)
@@ -89,6 +90,7 @@ void	show_alloc_mem_ex(void)
 	pthread_mutex_lock(&g_mutex);
 	heap = g_heap;
 	total_allocated = 0;
+	ft_putstr("\n----- Detailed memory allocation Mem_ex -----\n");
 	while (heap)
 	{
 		if (heap->type == TINY)
@@ -101,15 +103,19 @@ void	show_alloc_mem_ex(void)
 		ft_putchar('\n');
 		block = (t_block *)HEAP_SHIFT(heap);
 		print_blocks(block, &total_allocated);
-		ft_putstr("total blocks : ");
+		ft_putstr("Total blocks used: ");
 		ft_putnbr(heap->block_count);
-		ft_putchar('\n');
+		ft_putstr(" blocks\n");
 		heap = heap->next;
 	}
-	ft_putstr("Total : ");
-	ft_putnbr(total_allocated);
-	ft_putstr(" bytes\n");
-
-	ft_putstr("----- End of detailed memory allocation -----\n");
+	if (total_allocated)
+	{
+		ft_putstr("Total : ");
+		ft_putnbr(total_allocated);
+		ft_putstr(" bytes\n");
+	}
+	else
+		ft_putstr("   No allocation found\n");
+	ft_putstr("----- End of detailed memory allocation Mem_ex -----\n\n");
 	pthread_mutex_unlock(&g_mutex);
 }

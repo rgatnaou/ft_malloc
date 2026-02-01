@@ -6,5 +6,5 @@ make
 export LD_LIBRARY_PATH=..:$LD_LIBRARY_PATH
 
 # Run the already compiled test binary
-./test
+valgrind ./test
 echo "All tests passed!"

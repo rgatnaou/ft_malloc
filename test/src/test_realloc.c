@@ -34,16 +34,21 @@ static void realloc_0() {
 static void realloc_1() {
 	char *t = malloc(1);
 	t = realloc(t, 1);
+	if (!t)
+		printf("Realloc(ptr, 1) should return ptr");
 	t = realloc(t, 10);
+	if (!t)
+		printf("Realloc(ptr, 1) should return ptr");
+	show_alloc_mem_ex();
 	t[0] = 'A';
 	t[9] = 'A';
 	t = realloc(t, TINY_BLOCK_MAX);
 	t = realloc(t, SMALL_BLOCK_MAX);
 	t = realloc(t, SMALL_BLOCK_MAX + 2);
 	t = realloc(t, 10);
-
 	if (t[0] != 'A' || t[9] != 'A')
 		printf("Realloc should copy data");
+	show_alloc_mem_ex();
 	free(t);
 }
 
@@ -54,13 +59,13 @@ static void realloc_large()
 	char    *addr3;
 
 	addr1 = (char *)malloc(1 * M1);
-	// strcpy(addr1, "Bonjours\n");
-	// addr2 = (char *)malloc(16 * M1);
-	// addr3 = (char *)realloc(addr1, 128* M1);
-	// addr3[127 * M1] = 42;
-	// free(addr3);
-	// free(addr2);
-	// free(addr1);
+	strcpy(addr1, "Bonjours\n");
+	addr2 = (char *)malloc(16 * M1);
+	addr3 = (char *)realloc(addr1, 128* M1);
+	addr3[127 * M1] = 42;
+	free(addr3);
+	free(addr2);
+	free(addr1);
 }
 
 void run_test_realloc(void)
@@ -69,4 +74,5 @@ void run_test_realloc(void)
 	realloc_0();
 	realloc_1();
 	realloc_large();
+	show_alloc_mem_ex();
 }

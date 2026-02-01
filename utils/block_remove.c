@@ -19,6 +19,5 @@ void	remove_block(t_heap *heap, t_block *block)
 		if (block->prev)
 			block->prev->next = NULL;
 		heap->free_size += block->data_size + sizeof(t_block);
-		heap->block_count--;
 	}
 }

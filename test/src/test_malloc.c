@@ -25,6 +25,7 @@ static void test_malloc_null()
 static void test_malloc_one()
 {
     char *t = (char *)malloc(1);
+
     if (!t) {
         printf("malloc(1) should return ptr\n");
         return;
@@ -34,6 +35,7 @@ static void test_malloc_one()
     t[2] = 0xFF;
     t[3] = 0xFF;
     show_alloc_mem_ex();
+    show_alloc_mem();
 
     t[0] = 0;
     free(t);
@@ -43,6 +45,7 @@ static void test_malloc_one()
 static void test_malloc_getpagesize()
 {
     void *t = malloc(getpagesize());
+    show_alloc_mem_ex();
     free(t);
 }
 
@@ -60,8 +63,9 @@ static void test_malloc_limits()
 
     // Should print mallocs in all categories (TINY, SMALL, LARGE)
     // show_alloc_mem();
-    // show_alloc_mem_hex();
+    show_alloc_mem_ex();
     // show_heap_list();
+    ft_putstr("mutex");
     free(t0);
 
     t0 = malloc(TINY_BLOCK_MAX - sizeof(t_block));
@@ -71,6 +75,7 @@ static void test_malloc_limits()
     free(t000);
     free(t1);
     free(t2);
+    free(t);
 }
 
 static void test_malloc_free_size()
@@ -86,12 +91,12 @@ static void test_malloc_free_size()
 void run_test_malloc(void)
 {
     test_malloc_null();
-    // test_malloc_one();
-    // test_malloc_getpagesize();
-    // test_malloc_limits();
-    // test_malloc_free_size();
+    test_malloc_one();
+    test_malloc_getpagesize();
+    test_malloc_limits();
+    test_malloc_free_size();
 
-    // show_alloc_mem();
+    show_alloc_mem_ex();
     // show_heap_list();
 }
 

@@ -16,6 +16,7 @@ static void	print_blocks(t_block *block, size_t *total_allocated)
 {
 	while (block)
 	{
+		ft_putstr("   ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)));
 		ft_putstr(" - ");
 		ft_putptr((void *)((char *)block + sizeof(t_block)
@@ -38,6 +39,7 @@ void	show_alloc_mem(void)
 	pthread_mutex_lock(&g_mutex);
 	heap = g_heap;
 	total_allocated = 0;
+	ft_putstr("\n--- Show Alloc Mem ---\n");
 	while (heap)
 	{
 		if (heap->type == TINY)
@@ -55,5 +57,6 @@ void	show_alloc_mem(void)
 	ft_putstr("Total : ");
 	ft_putnbr(total_allocated);
 	ft_putstr(" bytes\n");
+	ft_putstr("---- end Show Alloc Mem ----\n\n");
 	pthread_mutex_unlock(&g_mutex);
 }

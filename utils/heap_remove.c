@@ -21,7 +21,11 @@ void	remove_heap(t_heap *heap)
 		if (heap->next)
 			heap->next->prev = heap->prev;
 		if (g_heap == heap)
+		{
 			g_heap = heap->next;
+			if (g_heap)
+				g_heap->prev = NULL;
+		}
 		munmap(heap, heap->total_size);
 	}
 }

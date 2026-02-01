@@ -22,5 +22,6 @@ void	ft_putchar(unsigned char c);
 void	ft_putstr(const char *str);
 void	ft_putnbr(size_t n);
 void	ft_putptr(void *ptr);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 #endif

@@ -37,6 +37,11 @@ t_block	*try_filling_block(size_t size)
 	find_block(size, &heap, &block);
 	if (!block)
 		return (NULL);
+	if(block->data_size == size)
+	{
+		block->is_free = 0;
+		return (block);
+	}
 	split_block(heap, block, size);
 	block->is_free = 0;
 	return (block);

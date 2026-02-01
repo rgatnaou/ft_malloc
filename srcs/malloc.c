@@ -21,6 +21,7 @@ void	*start_malloc(size_t size)
 		return (NULL);
 	size = ALIGN(size);
 	block = try_filling_block(size);
+	// ft_putstr("check2\n");
 	if (block)
 		return (BLOCK_SHIFT(block));
 	heap = find_heap(size);
@@ -34,6 +35,9 @@ void	*malloc(size_t size)
 {
 	void	*block;
 
+	ft_putstr("malloc called :");
+	ft_putnbr(size);
+	ft_putstr("\n");
 	pthread_mutex_lock(&g_mutex);
 	block = start_malloc(size);
 	pthread_mutex_unlock(&g_mutex);

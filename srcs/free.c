@@ -19,6 +19,7 @@ void	start_free(t_heap *heap, t_block *block)
 		block->is_free = 1;
 		merge_block(heap, block);
 		remove_block(heap, block);
+		heap->block_count--;
 		remove_heap(heap);
 	}
 }
@@ -30,8 +31,10 @@ void	free(void *ptr)
 
 	heap = g_heap;
 	pthread_mutex_lock(&g_mutex);
-	if (!ptr || !heap)
+	if (!ptr || !heap){
+		pthread_mutex_unlock(&g_mutex);
 		return ;
+	}
 	ptr_search(ptr, &heap, &block);
 	start_free(heap, block);
 	pthread_mutex_unlock(&g_mutex);

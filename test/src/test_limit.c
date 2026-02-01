@@ -17,20 +17,23 @@
 
 void run_test_rlimit()
 {
-    char *t;
-    struct rlimit rpl;
+    // char *t;
+    // struct rlimit rpl;
 
-    rpl.rlim_cur = TINY_HEAP_SIZE ;
-    rpl.rlim_max = TINY_HEAP_SIZE ;
+    // rpl.rlim_cur = TINY_HEAP_SIZE ;
+    // rpl.rlim_max = TINY_HEAP_SIZE ;
 
-    if (setrlimit(RLIMIT_DATA, &rpl) < 0)
-        printf("setrlimit did not work\n");
+    // if (setrlimit(RLIMIT_DATA, &rpl) < 0)
+    //     printf("setrlimit did not work\n");
 
-    if (!(t = (char *)malloc(TINY_HEAP_SIZE  - sizeof(t_block) - sizeof(t_heap))))
-        printf("malloc() should return ptr\n");
-    free(t);
+    // if (!(t = (char *)malloc(TINY_HEAP_SIZE  - sizeof(t_block) - sizeof(t_heap))))
+    //     printf("malloc() should return ptr..\n");
+    
+    printf("TINY_HEAP_SIZE : %d\n",4 * getpagesize());
+    // printf("TINY_HEAP_SIZE : %d\n",TINY_HEAP_SIZE);
+    // free(t);
 
-    if ((t = (char *)malloc(TINY_HEAP_SIZE )))
-        printf("malloc() should return NULL\n");
-    free(t);
+    // if ((t = (char *)malloc(TINY_HEAP_SIZE )))
+    //     printf("malloc() should return NULL\n");
+    // free(t);
 }

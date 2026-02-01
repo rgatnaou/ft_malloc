@@ -37,13 +37,9 @@ static void test_realloc_mix(void) {
 
 static void test_realloc_mix_2(void) {
 	void *test = malloc(10);
-	show_alloc_mem_ex();
 	test = realloc(test, 11);
-	show_alloc_mem_ex();
-	test = realloc(test, 9);
-	show_alloc_mem_ex();
+	test = realloc(test, 10);
 	test = realloc(test, 8);
-	show_alloc_mem_ex();
 	free(test);
 }
 
@@ -63,9 +59,9 @@ void test_show_alloc_mem_ex(void) {
 
 void run_test_mixed(void)
 {
-	// test_show_alloc_mem_ex();
-	// test_free_1();
-	// test_realloc_mix();
+	test_show_alloc_mem_ex();
+	test_free_1();
+	test_realloc_mix();
 	test_realloc_mix_2();
 	show_alloc_mem_ex();
 }

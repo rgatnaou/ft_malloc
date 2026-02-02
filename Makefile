@@ -23,7 +23,7 @@ SRC_LIBFT = libft/srcs
 SRC_UTILS = utils
 OBJ_DIR = objs
 
-SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c \
+SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c  $(SRC_MAIN)/getenv.c \
 		$(SRC_MAIN)/show_alloc_mem.c $(SRC_MAIN)/show_alloc_mem_ex.c\
         $(SRC_UTILS)/block_append.c $(SRC_UTILS)/block_fill.c $(SRC_UTILS)/block_find.c \
 		$(SRC_UTILS)/block_remove.c $(SRC_UTILS)/block_merge.c\

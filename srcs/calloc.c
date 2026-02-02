@@ -22,6 +22,7 @@ void	*calloc(size_t count, size_t size)
 		return (NULL);
 	total_size = count * size;
 	pthread_mutex_lock(&g_mutex);
+	logs_debug("Calloc called with size", total_size);
 	ptr = start_malloc(total_size);
 	if (block)
 		ft_memset(ptr, 0, size);

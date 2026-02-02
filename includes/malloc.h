@@ -13,12 +13,11 @@
 #ifndef MALLOC_H
 # define MALLOC_H
 
-//test
-# include <stdio.h>
 
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/mman.h>
+# include <stdlib.h>
 # include "../libft/includes/libft.h"
 
 // This is how we'll ask the OS for memory. sys/mman.h provides these.
@@ -108,7 +107,7 @@ void	show_alloc_mem_ex(void);
 //      HELPER FUNCTIONS
 // ========================
 
-void	start_free(t_heap *heap, t_block *block);
+void	start_free(void *ptr);
 void	*start_malloc(size_t size);
 
 int				get_heap_size(size_t size);
@@ -126,11 +125,29 @@ void	remove_block(t_heap *heap, t_block *block);
 void	remove_heap(t_heap *heap);
 
 // ========================
+//    ENVIRONMENT FLAGS
+// ========================
+typedef enum e_env {
+	ENV_DEBUG     = (1 << 0),  // 00000001
+	ENV_SHOW      = (1 << 1),  // 00000010
+	ENV_FILL      = (1 << 2),  // 00000100
+}	t_env;
+
+// ========================
+//    DEBUG FUNCTIONS
+// ========================
+
+int		getenv_cached(t_env env);
+void	logs_show();
+void	logs_debug(char *msg, size_t size);
+
+// ========================
 //      DEBUG FUNCTIONS
 // ========================
 
 void	show_heap(void);
 void	print_block(t_block *block);
 void	print_heap(t_heap *heap);
+
 
 #endif

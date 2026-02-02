@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/malloc.h"
+#include "../../includes/malloc.h"
 #include <string.h>
 
 void	print(char *s)

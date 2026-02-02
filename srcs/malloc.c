@@ -21,25 +21,25 @@ void	*start_malloc(size_t size)
 		return (NULL);
 	size = ALIGN(size);
 	block = try_filling_block(size);
-	// ft_putstr("check2\n");
 	if (block)
 		return (BLOCK_SHIFT(block));
 	heap = find_heap(size);
 	if (!heap)
 		return (NULL);
 	block = append_block(heap, size);
+	logs_show();
 	return (BLOCK_SHIFT(block));
 }
 
 void	*malloc(size_t size)
 {
-	void	*block;
+	void	*ptr;
 
-	ft_putstr("malloc called :");
-	ft_putnbr(size);
-	ft_putstr("\n");
 	pthread_mutex_lock(&g_mutex);
-	block = start_malloc(size);
+	logs_debug("Malloc called with size", size);
+	ptr = start_malloc(size);
+	if (getenv_cached(ENV_FILL))
+		ft_memset(ptr, 0xaa, size);
 	pthread_mutex_unlock(&g_mutex);
-	return (block);
+	return (ptr);
 }

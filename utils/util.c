@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test5.c                                            :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/21 15:17:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2026/02/04 23:05:29 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/02/04 14:54:42 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/04 18:53:56 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-int	main(void)
+size_t	heap_size(int pages)
 {
-	show_alloc_mem_ex();
-	malloc(1024);
-	malloc(1024 * 32);
-	malloc(1024 * 1024);
-	malloc(1024 * 1024 * 16);
-	malloc(1024 * 1024 * 128);
-	show_alloc_mem();
-	return (0);
+	return (pages * getpagesize());
+}
+
+size_t	align_size(size_t size)
+{
+	return ((size + (16 - 1)) & ~(16 - 1));
+}
+
+void	*get_ptr(t_block *ptr)
+{
+	return ((void *)((char *)ptr + sizeof(t_block)));
+}
+
+t_block	*heap_shift(t_heap *ptr)
+{
+	return ((void *)((char *)ptr + sizeof(t_heap)));
+}
+
+void	*end_of_ptr(t_block *ptr)
+{
+	return ((void *)((char *)ptr + sizeof(t_block) + ptr->data_size));
 }

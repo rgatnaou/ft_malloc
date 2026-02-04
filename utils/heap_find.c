@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 15:24:44 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/12 19:03:49 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:04:29 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_heap	*find_heap(size_t size)
 {
 	t_heap				*heap;
-	enum e_heap_type	type;
+	t_heap_group		type;
 
 	type = get_heap_type(size);
 	heap = g_heap;

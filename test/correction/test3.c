@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 14:52:33 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:17:32 by jterrazz         ###   ########.fr       */
+/*   Updated: 2026/02/04 21:36:43 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		main(void)
 	addr3 = realloc(addr1, 128 * M);
 	addr3[127 * M] = 42;
 	print(addr3);
+	show_alloc_mem_ex();
 	return (0);
 }

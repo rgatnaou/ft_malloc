@@ -1,10 +1,21 @@
-#include "malloc.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   getenv.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 14:03:19 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/04 14:06:16 by rgatnaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "malloc.h"
 
 int	getenv_cached(t_env env)
 {
 	static int	cached_env_flags;
-	static int cached_initialized;
+	static int	cached_initialized;
 
 	if (!cached_initialized)
 	{
@@ -19,16 +30,16 @@ int	getenv_cached(t_env env)
 	return (env & cached_env_flags);
 }
 
-void	logs_show()
+void	logs_show(void)
 {
-	if (getenv_cached(ENV_SHOW)){
+	if (getenv_cached(ENV_SHOW))
 		show_alloc_mem();
-	}
 }
 
 void	logs_debug(char *msg, size_t size)
 {
-	if (getenv_cached(ENV_DEBUG)){
+	if (getenv_cached(ENV_DEBUG))
+	{
 		ft_putstr(msg);
 		if (msg[0] == 'F')
 		{

@@ -6,13 +6,12 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/22 19:04:17 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:54:13 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
-
 
 # include <pthread.h>
 # include <unistd.h>
@@ -66,51 +65,43 @@ typedef struct s_block
 //       CONSTANTS
 // ========================
 
-// Zone sizes (must be multiple of page size)
-# define TINY_HEAP_SIZE (4 * getpagesize())   // N
-# define SMALL_HEAP_SIZE (16 * getpagesize())  // M
+// Zone sizes
+/*
+** For a pagesize of 4096 bytes
+**
+** TINY - block <= 128 bytes  - heap 16 KB	--> 4 pages
+** SMALL - block <= 1024 bytes - heap 129 KB --> 32 pages
+** LARGE - block > 1024 bytes
+*/
 
-// n: maximum size for tiny allocations
-# define TINY_BLOCK_MAX (TINY_HEAP_SIZE / 128)
-// n + 1: minimum size for small allocations
-# define TINY_BLOCK_MIN 16
-
-// m: maximum size for small allocations
-# define SMALL_BLOCK_MAX (SMALL_HEAP_SIZE / 128)
-// m + 1: minimum size for large allocations
-# define SMALL_BLOCK_MIN (TINY_BLOCK_MAX + 1)
-
-// Memory alignment (usually 16 bytes for x86_64)
-# define ALIGNMENT 16
-# define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
-
-// Shift to get user data from heap metadata
-# define HEAP_SHIFT(heap) ((void *)((char *)(heap) + sizeof(t_heap)))
-// Shift to get user data from block metadata
-# define BLOCK_SHIFT(block) ((void *)((char *)(block) + sizeof(t_block)))
+# define TINY_BLOCK_MAX 128
+# define SMALL_BLOCK_MAX 1024
 
 // ========================
 //       GLOBAL VARIABLES
 // ========================
+
 extern pthread_mutex_t	g_mutex;
 extern t_heap			*g_heap;
 
 // ========================
 //       MAIN FUNCTIONS
 // ========================
+
 void	*malloc(size_t size);
 void	free(void *ptr);
 void	*realloc(void *ptr, size_t size);
 void	show_alloc_mem(void);
 void	show_alloc_mem_ex(void);
+
 // ========================
 //      HELPER FUNCTIONS
 // ========================
 
 void	start_free(void *ptr);
 void	*start_malloc(size_t size);
+int		get_heap_size(size_t size);
 
-int				get_heap_size(size_t size);
 t_heap_group	get_heap_type(size_t size);
 
 void	find_block(size_t s, t_heap **res_heap, t_block **res_block);
@@ -124,13 +115,23 @@ t_block	*merge_block(t_heap *heap, t_block *block);
 void	remove_block(t_heap *heap, t_block *block);
 void	remove_heap(t_heap *heap);
 
+void	print_group(t_heap *heap);
+void	print_summary(size_t total_allocated, size_t total_blocks, size_t total_heaps);
+
+size_t	heap_size(int pages);
+size_t	align_size(size_t size);
+void	*get_ptr(t_block *ptr);
+t_block	*heap_shift(t_heap *ptr);
+void	*end_of_ptr(t_block *ptr);
+
 // ========================
 //    ENVIRONMENT FLAGS
 // ========================
-typedef enum e_env {
-	ENV_DEBUG     = (1 << 0),  // 00000001
-	ENV_SHOW      = (1 << 1),  // 00000010
-	ENV_FILL      = (1 << 2),  // 00000100
+typedef enum e_env
+{
+	ENV_DEBUG = (1 << 0),
+	ENV_SHOW = (1 << 1),
+	ENV_FILL = (1 << 2)
 }	t_env;
 
 // ========================
@@ -138,7 +139,7 @@ typedef enum e_env {
 // ========================
 
 int		getenv_cached(t_env env);
-void	logs_show();
+void	logs_show(void);
 void	logs_debug(char *msg, size_t size);
 
 // ========================
@@ -148,6 +149,5 @@ void	logs_debug(char *msg, size_t size);
 void	show_heap(void);
 void	print_block(t_block *block);
 void	print_heap(t_heap *heap);
-
 
 #endif

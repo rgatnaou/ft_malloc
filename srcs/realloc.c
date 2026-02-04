@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:39:26 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/21 19:48:10 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:26:33 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*start_realloc(void *ptr, size_t size)
 	ptr_search(ptr, &heap, &block);
 	if (!heap || !block)
 		return (NULL);
-	else if (ALIGN(size) == block->data_size)
+	else if (align_size(size) == block->data_size)
 		return (ptr);
 	new_ptr = start_malloc(size);
 	ft_memmove(new_ptr, ptr, block->data_size);
@@ -50,7 +50,8 @@ void	*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	if (!ptr){
+	if (!ptr)
+	{
 		pthread_mutex_unlock(&g_mutex);
 		return (start_malloc(size));
 	}
@@ -58,4 +59,3 @@ void	*realloc(void *ptr, size_t size)
 	pthread_mutex_unlock(&g_mutex);
 	return (new_ptr);
 }
-

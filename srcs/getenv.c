@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 14:03:19 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 14:06:16 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:51:47 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,25 @@ void	logs_show(void)
 
 void	logs_debug(char *msg, size_t size)
 {
-	if (getenv_cached(ENV_DEBUG))
+	int		fd;
+	char	*env_file;
+
+	if (!getenv_cached(ENV_DEBUG))
+		return ;
+	env_file = getenv("Malloc42DebugFile");
+	if (env_file)
+		fd = open(env_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if(!env_file || fd == -1)
+		fd = open(LOGS_FILE, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd != -1)
 	{
-		ft_putstr(msg);
-		if (msg[0] == 'F')
+		ft_putstr_fd(msg, fd);
+		if (msg[0] != 'F')
 		{
-			ft_putstr(" : ");
-			ft_putnbr(size);
+			ft_putstr_fd(" : ", fd);
+			ft_putnbr_fd(size, fd);
 		}
-		ft_putstr("\n");
+		ft_putstr_fd("\n", fd);
 	}
+	close(fd);
 }

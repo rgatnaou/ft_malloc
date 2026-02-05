@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 18:42:27 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 18:54:13 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:36:29 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MALLOC_H
 
 # include <pthread.h>
+#include <fcntl.h>
 # include <unistd.h>
 # include <sys/mman.h>
 # include <stdlib.h>
@@ -76,6 +77,8 @@ typedef struct s_block
 
 # define TINY_BLOCK_MAX 128
 # define SMALL_BLOCK_MAX 1024
+
+# define LOGS_FILE "/tmp/malloc_debug.log"
 
 // ========================
 //       GLOBAL VARIABLES

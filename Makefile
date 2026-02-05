@@ -6,7 +6,7 @@
 #    By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/04 19:25:27 by rgatnaou          #+#    #+#              #
-#    Updated: 2026/02/04 20:27:38 by rgatnaou         ###   ########.fr        #
+#    Updated: 2026/02/05 14:41:00 by rgatnaou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRCS =	$(SRC_MAIN)/malloc.c $(SRC_MAIN)/free.c $(SRC_MAIN)/realloc.c  $(SRC_MAIN
         $(SRC_UTILS)/global_var.c $(SRC_UTILS)/size.c $(SRC_UTILS)/ptr_search.c \
         $(SRC_UTILS)/heap_create.c $(SRC_UTILS)/heap_find.c $(SRC_UTILS)/heap_remove.c $(SRC_UTILS)/util.c \
         $(SRC_LIBFT)/ft_memset.c $(SRC_LIBFT)/ft_strlen.c $(SRC_LIBFT)/ft_putchar.c $(SRC_LIBFT)/ft_putstr.c \
-		$(SRC_LIBFT)/ft_putnbr.c $(SRC_LIBFT)/ft_putptr.c $(SRC_LIBFT)/ft_memcpy.c $(SRC_LIBFT)/ft_memmove.c
+		$(SRC_LIBFT)/ft_putnbr.c $(SRC_LIBFT)/ft_putptr.c $(SRC_LIBFT)/ft_memcpy.c $(SRC_LIBFT)/ft_memmove.c \
+		$(SRC_LIBFT)/ft_putnbr_fd.c $(SRC_LIBFT)/ft_putchar_fd.c  $(SRC_LIBFT)/ft_putstr_fd.c
 
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

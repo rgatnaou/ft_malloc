@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 17:47:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 19:18:35 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 23:18:25 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	print_blocks(t_block *block, size_t *t_allocated, size_t *t_blocks)
 {
 	while (block && !block->is_free)
 	{
-		ft_putstr("\n   ");
+		ft_putstr("\n");
 		ft_putptr(get_ptr(block));
 		ft_putstr(" - ");
 		ft_putptr(end_of_ptr(block));
@@ -73,7 +73,6 @@ void	show_alloc_mem(void)
 	total_allocated = 0;
 	total_blocks = 0;
 	total_heaps = 0;
-	ft_putstr("\n--- Show Alloc Mem ---\n");
 	while (heap)
 	{
 		print_group(heap);
@@ -83,6 +82,5 @@ void	show_alloc_mem(void)
 		total_heaps++;
 	}
 	print_summary(total_allocated, total_blocks, total_heaps);
-	ft_putstr("---- end Show Alloc Mem ----\n\n");
 	pthread_mutex_unlock(&g_mutex);
 }

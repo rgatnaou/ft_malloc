@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 15:08:34 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 20:31:00 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:18:12 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*malloc(size_t size)
 {
 	void	*ptr;
 
-	(void)size;
 	pthread_mutex_lock(&g_mutex);
 	logs_debug("Malloc called with size", size);
 	ptr = start_malloc(size);

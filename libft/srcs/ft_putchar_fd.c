@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test5.c                                            :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/21 15:17:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2026/02/05 11:45:15 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/02/05 13:50:05 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/05 13:50:57 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include<unistd.h>
 
-int	main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	malloc(1024);
-	malloc(1024 * 32);
-	malloc(1024 * 1024);
-	malloc(1024 * 1024 * 16);
-	malloc(1024 * 1024 * 128);
-	return (0);
+	write(fd, &c, 1);
 }

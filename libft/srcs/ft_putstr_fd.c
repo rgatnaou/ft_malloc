@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test5.c                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/21 15:17:08 by jterrazz          #+#    #+#             */
-/*   Updated: 2026/02/05 11:45:15 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/02/05 13:49:36 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/05 13:49:37 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putstr_fd(char *s, int fd)
 {
-	malloc(1024);
-	malloc(1024 * 32);
-	malloc(1024 * 1024);
-	malloc(1024 * 1024 * 16);
-	malloc(1024 * 1024 * 128);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	if (fd > 0)
+	{
+		while (s[i])
+		{
+			ft_putchar_fd(s[i], fd);
+			i++;
+		}
+	}
 }

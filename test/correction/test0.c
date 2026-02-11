@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   test0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:16:48 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:18:03 by jterrazz         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:18:37 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/malloc.h"
+#include "malloc.h"
 
 int	main(void)
 {

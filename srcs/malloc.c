@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 15:08:34 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/22 18:01:26 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:18:12 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	*start_malloc(size_t size)
 
 	if (!size)
 		return (NULL);
-	size = ALIGN(size);
+	size = align_size(size);
 	block = try_filling_block(size);
 	if (block)
-		return (BLOCK_SHIFT(block));
+		return (get_ptr(block));
 	heap = find_heap(size);
 	if (!heap)
 		return (NULL);
 	block = append_block(heap, size);
 	logs_show();
-	return (BLOCK_SHIFT(block));
+	return (get_ptr(block));
 }
 
 void	*malloc(size_t size)

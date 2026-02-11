@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:09 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/10 19:02:57 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:27:49 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	find_block(size_t s, t_heap **res_heap, t_block **res_block)
 	group = get_heap_type(s);
 	while (heap)
 	{
-		block = HEAP_SHIFT(heap);
+		block = heap_shift(heap);
 		while (block)
 		{
 			if (heap->type == group && block->is_free

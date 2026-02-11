@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 20:22:21 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/01/21 18:14:39 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:34:58 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	split_block(t_heap *heap, t_block *block, size_t size)
 {
 	t_block	*new_block;
 
-	new_block = (t_block *)((char *)BLOCK_SHIFT(block) + size);
+	new_block = (t_block *)((char *)get_ptr(block) + size);
 	new_block->data_size = block->data_size - size - sizeof(t_block);
 	new_block->is_free = 1;
 	new_block->prev = block;
@@ -37,7 +37,7 @@ t_block	*try_filling_block(size_t size)
 	find_block(size, &heap, &block);
 	if (!block)
 		return (NULL);
-	if(block->data_size == size)
+	if (block->data_size == size)
 	{
 		block->is_free = 0;
 		return (block);

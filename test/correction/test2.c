@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jterrazz <jterrazz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 15:16:57 by jterrazz          #+#    #+#             */
-/*   Updated: 2019/07/22 11:18:09 by jterrazz         ###   ########.fr       */
+/*   Updated: 2026/02/04 20:12:54 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(void)
 		free(addr);
 		i++;
 	}
+	// show_alloc_mem();
 	return (0);
 }

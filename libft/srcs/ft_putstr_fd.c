@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 14:35:20 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 14:35:23 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/02/05 13:49:36 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/05 13:49:37 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char			*dst_str;
-	char			*src_str;
+	int	i;
 
-	dst_str = (char *)dst;
-	src_str = (char *)src;
-	if (dst == src)
-		return (dst);
-	if (dst_str < src_str)
-		ft_memcpy(dst_str, src_str, len);
-	else
+	i = 0;
+	if (!s)
+		return ;
+	if (fd > 0)
 	{
-		while (len--)
-			dst_str[len] = src_str[len];
+		while (s[i])
+		{
+			ft_putchar_fd(s[i], fd);
+			i++;
+		}
 	}
-	return (dst);
 }

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 14:35:20 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 14:35:23 by rgatnaou         ###   ########.fr       */
+/*   Created: 2026/02/05 13:51:51 by rgatnaou          #+#    #+#             */
+/*   Updated: 2026/02/05 13:51:56 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char			*dst_str;
-	char			*src_str;
+	long	nb;
 
-	dst_str = (char *)dst;
-	src_str = (char *)src;
-	if (dst == src)
-		return (dst);
-	if (dst_str < src_str)
-		ft_memcpy(dst_str, src_str, len);
-	else
+	nb = n;
+	if (nb < 0)
 	{
-		while (len--)
-			dst_str[len] = src_str[len];
+		ft_putchar_fd('-', fd);
+		nb = nb * -1;
 	}
-	return (dst);
+	if (nb > 9)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd((nb % 10) + 48, fd);
 }

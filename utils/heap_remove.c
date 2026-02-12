@@ -28,7 +28,6 @@ int	last_heap(t_heap *heap)
 	return (count == 1);
 }
 
-
 void	remove_heap(t_heap *heap)
 {
 	if (heap->block_count == 0)

@@ -46,7 +46,7 @@ void	logs_debug(char *msg, size_t size)
 	env_file = getenv("Malloc42DebugFile");
 	if (env_file)
 		fd = open(env_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if(!env_file || fd == -1)
+	if (!env_file || fd == -1)
 		fd = open(LOGS_FILE, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd != -1)
 	{

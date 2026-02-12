@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "malloc.h"
-#include <limits.h>
 
 void	*calloc(size_t count, size_t size)
 {
@@ -20,12 +19,15 @@ void	*calloc(size_t count, size_t size)
 
 	pthread_mutex_lock(&g_mutex);
 	if (size != 0 && count > SIZE_MAX / size)
+	{
+		pthread_mutex_unlock(&g_mutex);
 		return (NULL);
+	}
 	total_size = count * size;
 	logs_debug("Calloc called with size", total_size);
 	ptr = start_malloc(total_size);
-	if (block)
-		ft_memset(ptr, 0, size);
+	if (ptr)
+		ft_memset(ptr, 0, total_size);
 	pthread_mutex_unlock(&g_mutex);
 	return (ptr);
 }

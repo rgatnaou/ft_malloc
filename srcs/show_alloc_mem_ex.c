@@ -29,32 +29,42 @@ void	print_chars(unsigned char *data, int size, int offset)
 	ft_putstr(" |\n");
 }
 
+void	print_hex(unsigned char *data, int limit, int offset)
+{
+	int	j;
+	int	index;
+
+	j = 0;
+	while (j < 16)
+	{
+		index = offset + j;
+		if (index < limit)
+		{
+			ft_putchar("0123456789abcdef"[data[index] / 16]);
+			ft_putchar("0123456789abcdef"[data[index] % 16]);
+		}
+		ft_putchar(' ');
+		j++;
+	}
+}
+
 static void	print_hex_dump(const void *addr, size_t size)
 {
 	const unsigned char	*data;
 	size_t				i;
-	size_t				j;
 	size_t				limit;
 
 	data = (const unsigned char *)addr;
 	i = 0;
-	limit = size > 256 ? 256 : size;
+	limit = size;
+	if (limit > 256)
+		limit = 256;
 	while (i < limit)
 	{
 		ft_putstr("  ");
 		ft_putnbr(i);
 		ft_putstr(" : ");
-		j = 0;
-		while (j < 16)
-		{
-			if (i + j < limit)
-			{
-				ft_putchar("0123456789abcdef"[data[i + j] / 16]);
-				ft_putchar("0123456789abcdef"[data[i + j] % 16]);
-			}
-			ft_putchar(' ');
-			j++;
-		}
+		print_hex((unsigned char *)data, limit, i);
 		print_chars((unsigned char *)data, limit, i);
 		i += 16;
 	}

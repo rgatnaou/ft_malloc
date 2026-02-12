@@ -39,7 +39,6 @@ void	print_group(t_heap *heap)
 	else
 		ft_putstr("LARGE : ");
 	ft_putptr((void *)heap);
-	// ft_putchar('\n');
 }
 
 void	print_summary(size_t t_allocated, size_t t_blocks, size_t t_heaps)

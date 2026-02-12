@@ -12,14 +12,14 @@
 
 #include "malloc.h"
 
-// static getlimit_t	get_system_limit(void)
-// {
-// 	struct rlimit	rpl;
+static rlim_t	get_system_limit(void)
+{
+	struct rlimit	rpl;
 
-// 	if (getrlimit(RLIMIT_DATA, &rpl) < 0)
-// 		return (-1);
-// 	return (rpl.rlim_max);
-// }
+	if (getrlimit(RLIMIT_DATA, &rpl) < 0)
+		return (-1);
+	return (rpl.rlim_max);
+}
 
 t_heap	*create_heap(size_t size)
 {
@@ -27,8 +27,8 @@ t_heap	*create_heap(size_t size)
 	size_t	heap_size;
 
 	heap_size = get_heap_size(size);
-	// if (heap_size > get_system_limit())
-	// 	return (NULL);
+	if (heap_size > get_system_limit())
+		return (NULL);
 	heap = mmap(NULL, heap_size, PROT_READ | PROT_WRITE,
 			MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
 	if (heap == MAP_FAILED)

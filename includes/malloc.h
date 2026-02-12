@@ -14,10 +14,11 @@
 # define MALLOC_H
 
 # include <pthread.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include <unistd.h>
-# include <sys/mman.h>
 # include <stdlib.h>
+# include <sys/mman.h>
+# include <sys/resource.h>
 # include "../libft/includes/libft.h"
 
 // This is how we'll ask the OS for memory. sys/mman.h provides these.
@@ -105,8 +106,6 @@ void	start_free(void *ptr);
 void	*start_malloc(size_t size);
 size_t	get_heap_size(size_t size);
 
-t_heap_group	get_heap_type(size_t size);
-
 void	find_block(size_t s, t_heap **res_heap, t_block **res_block);
 t_block	*try_filling_block(size_t size);
 t_heap	*create_heap(size_t size);
@@ -119,7 +118,7 @@ void	remove_block(t_heap *heap, t_block *block);
 void	remove_heap(t_heap *heap);
 
 void	print_group(t_heap *heap);
-void	print_summary(size_t total_allocated, size_t total_blocks, size_t total_heaps);
+void	print_summary(size_t t_alloc, size_t t_blocks, size_t t_heaps);
 
 size_t	heap_size(int pages);
 size_t	align_size(size_t size);
@@ -145,12 +144,9 @@ int		getenv_cached(t_env env);
 void	logs_show(void);
 void	logs_debug(char *msg, size_t size);
 
-// ========================
-//      DEBUG FUNCTIONS
-// ========================
-
 void	show_heap(void);
 void	print_block(t_block *block);
 void	print_heap(t_heap *heap);
+int		get_heap_type(size_t size);
 
 #endif

@@ -6,3 +6,11 @@ malloc-42
 libft*.so
 tests/test_basic
 test/test
+logs.txt
+test1_bin
+test2
+test3_bin
+test4_bin
+test5_bin
+tests/test_comprehensive
+tests/test_comprehensive.c

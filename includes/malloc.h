@@ -103,7 +103,7 @@ void	show_alloc_mem_ex(void);
 
 void	start_free(void *ptr);
 void	*start_malloc(size_t size);
-int		get_heap_size(size_t size);
+size_t	get_heap_size(size_t size);
 
 t_heap_group	get_heap_type(size_t size);
 

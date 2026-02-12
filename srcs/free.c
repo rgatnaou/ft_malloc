@@ -26,9 +26,8 @@ void	start_free(void *ptr)
 		block->is_free = 1;
 		if (getenv_cached(ENV_FILL))
 			ft_memset(ptr, 0x55, block->data_size);
-		merge_block(heap, block);
+		block = merge_block(heap, block);
 		remove_block(heap, block);
-		heap->block_count--;
 		remove_heap(heap);
 		logs_show();
 	}

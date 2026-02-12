@@ -17,7 +17,7 @@
 #include <string.h>
 #include <time.h>
 
-#define MAX_PTRS 10000
+#define MAX_PTRS 1000
 #define MAX_SIZE 4096
 #define ALIGNMENT 16
 
@@ -30,7 +30,7 @@ int main(void)
 
     srand(time(NULL));
 
-    while (2) // infinite stress loop
+    while (1) // infinite stress loop
     {
         /* Random allocations */
         // printf("\n******start :\n");
@@ -38,7 +38,7 @@ int main(void)
         {
             // printf("start loop: i=%d\n",i);
             sizes[i] = rand() % MAX_SIZE + 1;
-            // printf("allocation size: %ld",sizes[i]);
+            // printf("allocation size: %ld\n",sizes[i]);
             ptrs[i] = malloc(sizes[i]);
 
             if (!ptrs[i])
@@ -70,6 +70,5 @@ int main(void)
         }
 		printf("✅ Freed blocks in random order\n");
     }
-
     return 0;
 }

@@ -19,7 +19,7 @@ size_t	heap_size(int pages)
 
 size_t	align_size(size_t size)
 {
-	return ((size + (16 - 1)) & ~(16 - 1));
+	return ((size + 15) & ~15);
 }
 
 void	*get_ptr(t_block *ptr)

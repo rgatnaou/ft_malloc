@@ -17,6 +17,7 @@ void	*start_realloc(void *ptr, size_t size)
 	t_block	*block;
 	t_heap	*heap;
 	void	*new_ptr;
+	size_t	copy_size;
 
 	heap = g_heap;
 	block = NULL;
@@ -33,7 +34,12 @@ void	*start_realloc(void *ptr, size_t size)
 	else if (align_size(size) == block->data_size)
 		return (ptr);
 	new_ptr = start_malloc(size);
-	ft_memmove(new_ptr, ptr, block->data_size);
+	if (!new_ptr)
+		return (NULL);
+	copy_size = block->data_size;
+	if (align_size(size) < copy_size)
+		copy_size = align_size(size);
+	ft_memmove(new_ptr, ptr, copy_size);
 	start_free(ptr);
 	return (new_ptr);
 }
@@ -52,8 +58,9 @@ void	*realloc(void *ptr, size_t size)
 	}
 	if (!ptr)
 	{
+		new_ptr = start_malloc(size);
 		pthread_mutex_unlock(&g_mutex);
-		return (start_malloc(size));
+		return (new_ptr);
 	}
 	new_ptr = start_realloc(ptr, size);
 	pthread_mutex_unlock(&g_mutex);

@@ -20,6 +20,7 @@ static t_block	*merge_prev_block(t_heap *heap, t_block *block)
 		if (block->next)
 			block->next->prev = block->prev;
 		block->prev->data_size += block->data_size + sizeof(t_block);
+		heap->block_count--;
 		return (block->prev);
 	}
 	return (block);
@@ -33,6 +34,7 @@ static void	merge_next_block(t_heap *heap, t_block *block)
 		if (block->next && block->next->next)
 			block->next->next->prev = block;
 		block->next = block->next->next;
+		heap->block_count--;
 	}
 }
 

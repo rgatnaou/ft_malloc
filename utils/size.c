@@ -12,14 +12,18 @@
 
 #include "malloc.h"
 
-int	get_heap_size(size_t size)
+// ...existing code...
+size_t	get_heap_size(size_t size)
 {
-	if (size <= (size_t)TINY_BLOCK_MAX)
-		return (heap_size(4));
-	else if (size <= (size_t)SMALL_BLOCK_MAX)
-		return (heap_size(32));
-	else
-		return (align_size(size + sizeof(t_heap) + sizeof(t_block)));
+    if (size <= (size_t)TINY_BLOCK_MAX)
+        return (heap_size(4));
+    else if (size <= (size_t)SMALL_BLOCK_MAX)
+        return (heap_size(32));
+    else
+    {
+        size_t total = align_size(size) + sizeof(t_heap) + sizeof(t_block);
+        return ((total + getpagesize() - 1) & ~(getpagesize() - 1));
+    }
 }
 
 t_heap_group	get_heap_type(size_t size)

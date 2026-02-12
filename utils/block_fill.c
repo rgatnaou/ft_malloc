@@ -16,6 +16,8 @@ void	split_block(t_heap *heap, t_block *block, size_t size)
 {
 	t_block	*new_block;
 
+	if (block->data_size < size + sizeof(t_block) + 16)
+		return ;
 	new_block = (t_block *)((char *)get_ptr(block) + size);
 	new_block->data_size = block->data_size - size - sizeof(t_block);
 	new_block->is_free = 1;
@@ -26,7 +28,6 @@ void	split_block(t_heap *heap, t_block *block, size_t size)
 	block->next = new_block;
 	block->data_size = size;
 	heap->block_count++;
-	heap->free_size -= sizeof(t_block);
 }
 
 t_block	*try_filling_block(size_t size)
@@ -35,7 +36,7 @@ t_block	*try_filling_block(size_t size)
 	t_block	*block;
 
 	find_block(size, &heap, &block);
-	if (!block)
+	if (!heap || !block)
 		return (NULL);
 	if (block->data_size == size)
 	{

@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 17:47:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 23:18:25 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/14 13:57:49 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,36 @@ static void	print_blocks(t_block *block, size_t *t_allocated, size_t *t_blocks)
 void	print_group(t_heap *heap)
 {
 	if (heap->type == TINY)
-		ft_putstr("\nTINY : ");
+		ft_putstr("\nTINY  : ");
 	else if (heap->type == SMALL)
-		ft_putstr("SMALL : ");
+		ft_putstr("SMALL  : ");
 	else
-		ft_putstr("LARGE : ");
+		ft_putstr("LARGE  : ");
 	ft_putptr((void *)heap);
 }
 
-void	print_summary(size_t t_allocated, size_t t_blocks, size_t t_heaps)
+void	print_summary(size_t t_alloc, size_t t_blo, size_t t_hp, int is_ex)
 {
-	if (t_allocated)
+	if (!t_alloc)
+		ft_putstr("   No allocation found\n");
+	else if (t_alloc && is_ex)
 	{
 		ft_putstr("\nTotal heaps  : ");
-		ft_putnbr(t_heaps);
+		ft_putnbr(t_hp);
 		ft_putstr("\n");
 		ft_putstr("Total blocks : ");
-		ft_putnbr(t_blocks);
+		ft_putnbr(t_blo);
 		ft_putstr("\n");
 		ft_putstr("Total bytes  : ");
-		ft_putnbr(t_allocated);
+		ft_putnbr(t_alloc);
 		ft_putstr("\n");
 	}
 	else
-		ft_putstr("   No allocation found\n");
+	{
+		ft_putstr("Total : ");
+		ft_putnbr(t_alloc);
+		ft_putstr(" bytes\n");
+	}
 }
 
 void	show_alloc_mem(void)
@@ -80,6 +86,6 @@ void	show_alloc_mem(void)
 		heap = heap->next;
 		total_heaps++;
 	}
-	print_summary(total_allocated, total_blocks, total_heaps);
+	print_summary(total_allocated, total_blocks, total_heaps, 0);
 	pthread_mutex_unlock(&g_mutex);
 }

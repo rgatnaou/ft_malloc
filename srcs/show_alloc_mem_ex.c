@@ -6,7 +6,7 @@
 /*   By: rgatnaou <rgatnaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 17:47:31 by rgatnaou          #+#    #+#             */
-/*   Updated: 2026/02/04 21:38:29 by rgatnaou         ###   ########.fr       */
+/*   Updated: 2026/02/13 11:48:08 by rgatnaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	show_alloc_mem_ex(void)
 		ft_putstr(" blocks\n\n");
 		heap = heap->next;
 	}
-	print_summary(total_allocated, total_blocks, total_heaps);
+	print_summary(total_allocated, total_blocks, total_heaps, 1);
 	ft_putstr("----- End of detailed memory allocation Mem_ex -----\n\n");
 	pthread_mutex_unlock(&g_mutex);
 }
